@@ -1,1 +1,1 @@
-web: python kiko-jones.py:app
+web: gunicorn kiko-jones:app
