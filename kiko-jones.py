@@ -83,7 +83,7 @@ def match_history():
 				game.kills = participant["kills"]
 				game.assists = participant["assists"]
 				game.deaths = participant["deaths"]
-				kda = (participant["kills"]+participant["assists"]/participant["deaths"])
+				kda = (participant["kills"]+participant["assists"])/participant["deaths"]
 				game.kda = round(kda, 1)
 				game.gpm = round(participant["challenges"]["goldPerMinute"],1)
 				i = i + 1
