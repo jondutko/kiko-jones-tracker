@@ -6,14 +6,14 @@ app = Flask(__name__)
 
 class Game:
 	def __init__(self):
-		win = True
-		minutes = 0
-		championName = "None"
-		gpm = 0
-		kda = 0
-		kills = 0
-		deaths = 0
-		assists = 0
+		self.win = True
+		self.minutes = 0
+		self.championName = "None"
+		self.gpm = 0
+		self.kda = 0
+		self.kills = 0
+		self.deaths = 0
+		self.assists = 0
 
 	def toString(self):
 		r = ""
