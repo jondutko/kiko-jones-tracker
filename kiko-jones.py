@@ -102,7 +102,7 @@ def match_history():
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 	
-	r = requests.get("https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+summid)
+	r = requests.get("https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+summid+"?api_key="+RIOT_KEY)
 	rjson = r.json()
 	elo = ""
 	print (rjson)
