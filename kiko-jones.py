@@ -29,7 +29,7 @@ class Game:
 			r = r + "  <font color=\"blue\">&uarr;"
 		else:
 			r = r + "  <font color=\"red\">&darr;" 
-		r = r + str(round(self.gpm - avg_gpm),1)+ "</font></br>"
+		r = r + str(round(self.gpm - avg_gpm,1))+ "</font></br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
 		if (self.kda > avg_kda):
 			r = r + "  <font color=\"blue\">&uarr;"
