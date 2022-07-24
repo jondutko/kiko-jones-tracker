@@ -15,15 +15,23 @@ class Game:
 		self.deaths = 0
 		self.assists = 0
 
-	def toHTML(self):
+	def toHTML(self, avg_kda, avg_gpm):
 		r = ""
 		if self.win:
 			r = "WIN"
 		else:
 			r = "LOSS"
 		r = r + "  " + self.championName + "  " + str(self.minutes) + "m </br>"
-		r = r + "  " + str(self.gpm) + "gold per minute </br>"
-		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</t>("+str(self.kda)+" k.d.a.)</br></br>"
+		r = r + "  " + str(self.gpm) + "  gm"
+		if (self.gpm > avg_gpm):
+			r = r + "  <font color="blue">&uarr;</font></br>"
+		else:
+			r = r + "  <font color="red">&darr;</font></br>"
+		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" k.d.a.)"
+		if (self.kda > avg_kda):
+			r = r + "  <font color="blue">&uarr;</font></br></br>"
+		else:
+			r = r + "  <font color="red">&darr;</font></br></br>"
 		
 		return r
 
@@ -70,7 +78,7 @@ def match_history():
 				game.deaths = participant["deaths"]
 				kda = (participant["kills"]+participant["assists"]/participant["deaths"])
 				game.kda = round(kda, 1)
-				game.gpm = participant["challenges"]["goldPerMinute"]
+				game.gpm = round(participant["challenges"]["goldPerMinute"],1)
 				i = i + 1
 				total_gpm = total_gpm + participant["challenges"]["goldPerMinute"]
 				total_kda = total_kda + kda
