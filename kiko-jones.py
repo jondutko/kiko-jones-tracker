@@ -29,13 +29,13 @@ class Game:
 			r = r + "  <font color=\"blue\">&uarr;"
 		else:
 			r = r + "  <font color=\"red\">&darr;" 
-		r = r + str(self.gpm - avg_gpm)+ "</font></br>"
+		r = r + str(round(self.gpm - avg_gpm),1)+ "</font></br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
 		if (self.kda > avg_kda):
 			r = r + "  <font color=\"blue\">&uarr;"
 		else:
 			r = r + "  <font color=\"red\">&darr;"
-		r = r + str(self.kda - avg_kda) + "</font></br></br>"
+		r = r + str(round(self.kda - avg_kda,1)) + "</font></br></br>"
 		return r
 
 Games = []
@@ -94,14 +94,16 @@ def match_history():
 		Games.append(game)
 
 	wr = round(total_win/i, 2) * 100
-	avg_kda = round(total_kda/i, 2)
-	avg_gpm = round(total_gpm/i, 2)
+	avg_kda = round(total_kda/i, 1)
+	avg_gpm = round(total_gpm/i, 1)
 
 	print (str(total_win)+" wins\t"+str(wr)+"%")
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 	
-	r = str(avg_kda) + "avg kda  "+str(avg_gpm)+"avg gpm  "+str(i)+" games  "+str(wr)+"% wins</br></br>"
+	r = "<h2>KIKO JONES<h2>"
+	r = r + "<h3>Match History + Anaylsis</h3></br></br>"
+	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
 
