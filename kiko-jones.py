@@ -21,13 +21,14 @@ class Game:
 			r = "WIN"
 		else:
 			r = "LOSS"
-		r = r + "</t>" + self.championName + "</t>" + str(self.minutes) + "m </br>"
-		r = r + "</t>" + str(self.gpm) + "gold per minute </br>"
-		r = r + "</t>" + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</t>("+str(self.kda)+" k.d.a.)"
+		r = r + "  " + self.championName + "  " + str(self.minutes) + "m </br>"
+		r = r + "  " + str(self.gpm) + "gold per minute </br>"
+		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</t>("+str(self.kda)+" k.d.a.)</br></br>"
 		
 		return r
 
 Games = []
+
 
 @app.route('/')
 def match_history():
@@ -85,8 +86,8 @@ def match_history():
 	print (str(total_win)+" wins\t"+str(wr)+"%")
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
-
-	r = str(avg_kda) + "avg kda</t>"+str(avg_gpm)+"avg gpm</t>"+str(i)+" games</t>"+str(wr)+"% wins</br></br>"
+	
+	r = str(avg_kda) + "avg kda  "+str(avg_gpm)+"avg gpm  "+str(i)+" games  "+str(wr)+"% wins</br></br>"
 	for game in Games:
 		r = r + game.toHTML() + "\n"
 
