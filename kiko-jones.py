@@ -20,10 +20,10 @@ class Game:
 	def toHTML(self, avg_kda, avg_gpm):
 		r = ""
 		if self.win:
-			r = "WIN"
+			r = "<font color=\"blue\">WIN"
 		else:
-			r = "LOSS"
-		r = r + "  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
+			r = "<font color=\"red\">LOSS"
+		r = r + "</font>  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
 		r = r + "  " + str(self.gpm) + "  gpm"
 		if (self.gpm > avg_gpm):
 			r = r + "  <font color=\"blue\">&uarr;"
@@ -106,7 +106,7 @@ def match_history():
 	rjson = r.json()
 	elo = ""	
 	for queue in rjson:
-		print queue
+		print (queue)
 		if (queue["queueType"] == "RANKED_SOLO_5X5"):
 			elo = queue["tier"] + " " + queue["rank"] + " " +queue["leaguePoints"] + "LP"
 			 
