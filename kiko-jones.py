@@ -71,7 +71,7 @@ def match_history():
 		rjson = r.json()
 
 		game.minutes = round(rjson["info"]["gameDuration"]/60)
-		unix_timestamp = rjson["info"]["gameEndTimestamp"]\
+		unix_timestamp = rjson["info"]["gameEndTimestamp"]
 		unix_timestamp = unix_timestamp/1000
 		game.date = datetime.fromtimestamp(unix_timestamp).strftime('%a %b %d')
 
