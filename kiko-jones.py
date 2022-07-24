@@ -107,7 +107,8 @@ def match_history():
 	elo = ""	
 	for queue in rjson:
 		print (queue)
-		elo = elo + queue["queueType"] + " " + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
+		if(queue["queueType"] == 'RANKED_SOLO_5x5'):
+			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
 	r = "<h2>KIKO JONES<h2>"
 	r = r + "<h3>Match History + Anaylsis</h3>"
