@@ -1,1 +1,1 @@
-web: python kiko-jones.py
+web: python kiko-jones.py:app
