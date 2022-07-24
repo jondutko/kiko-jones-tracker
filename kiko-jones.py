@@ -97,6 +97,6 @@ def match_history():
 	
 	r = str(avg_kda) + "avg kda  "+str(avg_gpm)+"avg gpm  "+str(i)+" games  "+str(wr)+"% wins</br></br>"
 	for game in Games:
-		r = r + game.toHTML() + "\n"
+		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
 
 	return r
