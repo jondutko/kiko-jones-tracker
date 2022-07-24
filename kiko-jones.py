@@ -15,15 +15,15 @@ class Game:
 		self.deaths = 0
 		self.assists = 0
 
-	def toString(self):
+	def toHTML(self):
 		r = ""
 		if self.win:
 			r = "WIN"
 		else:
 			r = "LOSS"
-		r = r + "\t" + self.championName + "\t" + str(self.minutes) + "m \n"
-		r = r + "\t" + str(self.gpm) + "gold per minute \n"
-		r = r + "\t" + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"\t("+str(self.kda)+" k.d.a.)"
+		r = r + "</t>" + self.championName + "</t>" + str(self.minutes) + "m </br>"
+		r = r + "</t>" + str(self.gpm) + "gold per minute </br>"
+		r = r + "</t>" + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</t>("+str(self.kda)+" k.d.a.)"
 		
 		return r
 
@@ -69,10 +69,12 @@ def match_history():
 				game.deaths = participant["deaths"]
 				kda = (participant["kills"]+participant["assists"]/participant["deaths"])
 				game.kda = round(kda, 1)
-
+				game.gpm = participant["challenges"]["goldPerMinute"]
 				i = i + 1
 				total_gpm = total_gpm + participant["challenges"]["goldPerMinute"]
 				total_kda = total_kda + kda
+				if game.win:
+					total_win = total_win + 1
 
 		Games.append(game)
 
@@ -84,8 +86,8 @@ def match_history():
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 
-	r = ""
+	r = str(avg_kda) + "avg kda</t>"+str(avg_gpm)+"avg gpm</t>"+str(i)+" games</t>"+str(wr)+"% wins</br></br>"
 	for game in Games:
-		r = r + game.toString() + "\n"
+		r = r + game.toHTML() + "\n"
 
 	return r
