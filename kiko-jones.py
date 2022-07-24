@@ -5,14 +5,15 @@ import os
 app = Flask(__name__)
 
 class Game:
-	win = True
-	minutes = 0
-	championName = "None"
-	gpm = 0
-	kda = 0
-	kills = 0
-	deaths = 0
-	assists = 0
+	def __init__(self):
+		win = True
+		minutes = 0
+		championName = "None"
+		gpm = 0
+		kda = 0
+		kills = 0
+		deaths = 0
+		assists = 0
 
 	def toString(self):
 		r = ""
