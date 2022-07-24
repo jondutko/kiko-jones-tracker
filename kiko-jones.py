@@ -72,7 +72,7 @@ def match_history():
 
 		game.minutes = round(rjson["info"]["gameDuration"]/60)
 		unix_timestamp = rjson["info"]["gameEndTimestamp"]
-		game.date = datetime.fromtimestamp(timestamp).strftime('%a %b %d')
+		game.date = datetime.fromtimestamp(unix_timestamp).strftime('%a %b %d')
 
 		for participant in rjson["info"]["participants"]:
 			if (participant["summonerName"] == summoner_name):
