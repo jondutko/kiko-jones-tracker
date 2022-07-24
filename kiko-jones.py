@@ -16,7 +16,7 @@ class Game:
 
 	def toString(self):
 		r = ""
-		if win:
+		if self.win:
 			r = "WIN"
 		else:
 			r = "LOSS"
