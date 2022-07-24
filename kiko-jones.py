@@ -24,14 +24,14 @@ class Game:
 		r = r + "  " + self.championName + "  " + str(self.minutes) + "m </br>"
 		r = r + "  " + str(self.gpm) + "  gm"
 		if (self.gpm > avg_gpm):
-			r = r + "  <font color="blue">&uarr;</font></br>"
+			r = r + "  <font color=\"blue\">&uarr;</font></br>"
 		else:
-			r = r + "  <font color="red">&darr;</font></br>"
+			r = r + "  <font color=\"red\">&darr;</font></br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" k.d.a.)"
 		if (self.kda > avg_kda):
-			r = r + "  <font color="blue">&uarr;</font></br></br>"
+			r = r + "  <font color=\"blue\">&uarr;</font></br></br>"
 		else:
-			r = r + "  <font color="red">&darr;</font></br></br>"
+			r = r + "  <font color=\"red\">&darr;</font></br></br>"
 		
 		return r
 
