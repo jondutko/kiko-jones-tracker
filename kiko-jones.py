@@ -1,5 +1,6 @@
 import requests
 from flask import Flask
+from datetime import datetime
 import os
 
 app = Flask(__name__)
@@ -7,6 +8,7 @@ app = Flask(__name__)
 class Game:
 	def __init__(self):
 		self.win = True
+		self.date = ""
 		self.minutes = 0
 		self.championName = "None"
 		self.gpm = 0
@@ -21,18 +23,19 @@ class Game:
 			r = "WIN"
 		else:
 			r = "LOSS"
-		r = r + "  " + self.championName + "  " + str(self.minutes) + "m </br>"
-		r = r + "  " + str(self.gpm) + "  gm"
+		r = r + "  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
+		r = r + "  " + str(self.gpm) + "  gpm"
 		if (self.gpm > avg_gpm):
-			r = r + "  <font color=\"blue\">&uarr;</font></br>"
+			r = r + "  <font color=\"blue\">&uarr;"
 		else:
-			r = r + "  <font color=\"red\">&darr;</font></br>"
-		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" k.d.a.)"
+			r = r + "  <font color=\"red\">&darr;" 
+		r = r + str(self.gpm - avg_gpm)+ "</font></br>"
+		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
 		if (self.kda > avg_kda):
-			r = r + "  <font color=\"blue\">&uarr;</font></br></br>"
+			r = r + "  <font color=\"blue\">&uarr;"
 		else:
-			r = r + "  <font color=\"red\">&darr;</font></br></br>"
-		
+			r = r + "  <font color=\"red\">&darr;"
+		r = r + str(self.kda - avg_kda) + "</font></br></br>"
 		return r
 
 Games = []
@@ -68,6 +71,8 @@ def match_history():
 		rjson = r.json()
 
 		game.minutes = round(rjson["info"]["gameDuration"]/60)
+		unix_timestamp = rjson["info"]["gameEndTimestamp"]
+		game.date = datetime.fromtimestamp(timestamp).strftime('%a %b %d')
 
 		for participant in rjson["info"]["participants"]:
 			if (participant["summonerName"] == summoner_name):
