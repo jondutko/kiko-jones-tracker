@@ -22,7 +22,7 @@ class Game:
 			r = "LOSS"
 		r = r + "\t" + self.championName + "\t" + str(self.minutes) + "m \n"
 		r = r + "\t" + str(self.gpm) + "gold per minute \n"
-		r = r + "\t" + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"\t("+str(kda)+" k.d.a.)"
+		r = r + "\t" + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"\t("+str(self.kda)+" k.d.a.)"
 
 Games = []
 
