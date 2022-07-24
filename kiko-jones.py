@@ -65,7 +65,7 @@ def match_history():
 
 	for match in matches:
 		game = Game()
-		print ("Preocessing "+match+" match id)
+		print ("Processing "+match+" match id")
 
 		r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/"+match+"?api_key="+RIOT_KEY)
 
