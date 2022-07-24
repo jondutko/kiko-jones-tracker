@@ -52,6 +52,7 @@ def match_history():
 	rjson = r.json()
 
 	puuid = rjson["puuid"]
+	summid = rjson["id"]
 
 	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=20&api_key="+RIOT_KEY)
 
@@ -101,8 +102,16 @@ def match_history():
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 	
+	r = requests.get("https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+summid)
+	rjson = r.json()
+	elo = ""
+	for queue in rjson:
+		if queue["queueType"] == "RANKED_SOLO_5X5":
+			elo = queue["tier"] + " " + queue["rank"] + " " +queue["leaguePoints"] + "LP"
+			 
 	r = "<h2>KIKO JONES<h2>"
 	r = r + "<h3>Match History + Anaylsis</h3>"
+	r = r + elo + "<br>"
 	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
