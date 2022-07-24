@@ -104,10 +104,10 @@ def match_history():
 	
 	r = requests.get("https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+summid+"?api_key="+RIOT_KEY)
 	rjson = r.json()
-	elo = ""
-	print (rjson)
+	elo = ""	
 	for queue in rjson:
-		if queue["queueType"] == "RANKED_SOLO_5X5":
+		print queue
+		if (queue["queueType"] == "RANKED_SOLO_5X5"):
 			elo = queue["tier"] + " " + queue["rank"] + " " +queue["leaguePoints"] + "LP"
 			 
 	r = "<h2>KIKO JONES<h2>"
