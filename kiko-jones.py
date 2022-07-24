@@ -38,11 +38,11 @@ class Game:
 		r = r + str(round(self.kda - avg_kda,1)) + "</font></br></br>"
 		return r
 
-Games = []
-
-
 @app.route('/')
 def match_history():
+	
+	Games = []
+	
 	RIOT_KEY = os.environ['RIOT_API_KEY']
 	summoner_name = "KIKO JONES"
 	summoner_name_html_safe = "KIKO%20JONES"
