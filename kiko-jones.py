@@ -14,7 +14,7 @@ class Game:
 	deaths = 0
 	assists = 0
 
-	def toString():
+	def toString(self):
 		r = ""
 		if win:
 			r = "WIN"
