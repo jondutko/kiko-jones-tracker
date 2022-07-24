@@ -102,7 +102,7 @@ def match_history():
 	print ("avg gpm: "+str(avg_gpm))
 	
 	r = "<h2>KIKO JONES<h2>"
-	r = r + "<h3>Match History + Anaylsis</h3></br></br>"
+	r = r + "<h3>Match History + Anaylsis</h3>"
 	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
