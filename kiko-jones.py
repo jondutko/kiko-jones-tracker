@@ -105,7 +105,7 @@ def process_matches():
 
 avg_kda = 0
 avg_gpm = 0
-i = -
+i = 0
 Games, avg_kda, avg_gpm, i = process_matches()
 
 @app.route('/refresh')
