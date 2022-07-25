@@ -21,7 +21,7 @@ class Game:
 	def toHTML(self, avg_kda, avg_gpm):
 		r = ""
 		if self.deluxe:
-			r = "<font size="2">&#x2B50;  </font>"
+			r = "<font size=\"2\">&#x2B50;  </font>"
 		if self.win:
 			r = r + "<font color=\"blue\">WIN"
 		else:
