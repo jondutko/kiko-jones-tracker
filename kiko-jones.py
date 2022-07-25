@@ -45,17 +45,16 @@ RIOT_KEY = os.environ['RIOT_API_KEY']
 summoner_name = "KIKO JONES"
 summoner_name_html_safe = "KIKO%20JONES"
 
+r = requests.get("https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+summoner_name_html_safe+"?api_key="+RIOT_KEY)
+
+rjson = r.json()
+
+puuid = rjson["puuid"]
+summid = rjson["id"]
+
 def process_matches():
 	g  = []
-	r = requests.get("https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+summoner_name_html_safe+"?api_key="+RIOT_KEY)
-
-	rjson = r.json()
-
-	puuid = rjson["puuid"]
-	summid = rjson["id"]
-
 	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=20&api_key="+RIOT_KEY)
-
 	matches = r.json()
 
 	i = 0
