@@ -93,7 +93,7 @@ def process_matches():
 
 		g.append(game)
 
-	wr = round(total_win/i, 2) * 100
+	wr = round((total_win/i) * 100)
 	avg_kda = round(total_kda/i, 1)
 	avg_gpm = round(total_gpm/i, 1)
 
@@ -101,12 +101,13 @@ def process_matches():
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 
-	return g, avg_kda, avg_gpm, i
+	return g, avg_kda, avg_gpm, i, wr
 
 avg_kda = 0
 avg_gpm = 0
 i = 0
-Games, avg_kda, avg_gpm, i = process_matches()
+wr = 0
+Games, avg_kda, avg_gpm, i, wr = process_matches()
 
 @app.route('/refresh')
 def refresh():
