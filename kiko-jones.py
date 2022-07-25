@@ -101,11 +101,12 @@ def process_matches():
 	print ("avg kda: "+str(avg_kda))
 	print ("avg gpm: "+str(avg_gpm))
 
-	return g, avg_kda, avg_gpm
+	return g, avg_kda, avg_gpm, i
 
 avg_kda = 0
 avg_gpm = 0
-Games, avg_kda, avg_gpm = process_matches()
+i = -
+Games, avg_kda, avg_gpm, i = process_matches()
 
 @app.route('/refresh')
 def refresh():
