@@ -16,13 +16,16 @@ class Game:
 		self.kills = 0
 		self.deaths = 0
 		self.assists = 0
+		self.deluxe = False
 
 	def toHTML(self, avg_kda, avg_gpm):
 		r = ""
+		if self.deluxe:
+			r = "&#x2B50;  "
 		if self.win:
-			r = "<font color=\"blue\">WIN"
+			r = r + "<font color=\"blue\">WIN"
 		else:
-			r = "<font color=\"red\">LOSS"
+			r = r + "<font color=\"red\">LOSS"
 		r = r + "</font>  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
 		r = r + "  " + str(self.gpm) + "  gpm"
 		if (self.gpm > avg_gpm):
@@ -54,7 +57,7 @@ summid = rjson["id"]
 
 def process_matches():
 	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=20&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=30&api_key="+RIOT_KEY)
 	matches = r.json()
 
 	i = 0
@@ -88,6 +91,8 @@ def process_matches():
 				i = i + 1
 				total_gpm = total_gpm + participant["challenges"]["goldPerMinute"]
 				total_kda = total_kda + kda
+				if (participant["challenges"]["takedownOnFirstTurret"] == 1):
+					game.deluxe = True
 				if game.win:
 					total_win = total_win + 1
 
@@ -126,7 +131,8 @@ def match_history():
 			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
 	r = "<h2>KIKO JONES<h2>"
-	r = r + "<h3>Match History + Anaylsis</h3>"
+	r = r + "<h3>Match History</h3>"
+	r = r + "(&#x2B50; indicates the deluxe was provided.)"
 	r = r + elo + "<br>"
 	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
 	for game in Games:
