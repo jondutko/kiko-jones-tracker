@@ -54,7 +54,7 @@ def process_matches():
 	puuid = rjson["puuid"]
 	summid = rjson["id"]
 
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=100&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=75&api_key="+RIOT_KEY)
 
 	matches = r.json()
 
