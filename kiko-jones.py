@@ -21,7 +21,7 @@ class Game:
 	def toHTML(self, avg_kda, avg_gpm):
 		r = ""
 		if self.deluxe:
-			r = "&#x2B50;  "
+			r = "<font size="2">&#x2B50;  </font>"
 		if self.win:
 			r = r + "<font color=\"blue\">WIN"
 		else:
@@ -132,7 +132,6 @@ def match_history():
 			 
 	r = "<h2>KIKO JONES<h2>"
 	r = r + "<h3>Match History</h3>"
-	r = r + "(&#x2B50; indicates the deluxe was provided.)"
 	r = r + elo + "<br>"
 	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
 	for game in Games:
