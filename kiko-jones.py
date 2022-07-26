@@ -109,14 +109,12 @@ def process_matches():
 
 	return g, avg_kda, avg_gpm, i, wr
 
-while True:
-	print ("Refreshing match history")
-	avg_kda = 0
-	avg_gpm = 0
-	i = 0
-	wr = 0
-	Games, avg_kda, avg_gpm, i, wr = process_matches()
-	time.sleep(600)
+print ("Refreshing match history")
+avg_kda = 0
+avg_gpm = 0
+i = 0
+wr = 0
+Games, avg_kda, avg_gpm, i, wr = process_matches()
 
 @app.route('/refresh')
 def refresh():
