@@ -30,7 +30,7 @@ class Game:
 		else:
 			r = r + "<font color=\"red\">LOSS"
 		r = r + "</font>  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
-		for item in items:
+		for item in self.items:
 			r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
 		r = r + "</br>"
 		r = r + "  " + str(self.gpm) + "  gpm"
