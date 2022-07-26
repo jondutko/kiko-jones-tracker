@@ -70,7 +70,7 @@ summid = rjson["id"]
 
 def process_matches():
 	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=90&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=50&api_key="+RIOT_KEY)
 	matches = r.json()
 
 	i = 0
@@ -80,7 +80,8 @@ def process_matches():
 
 	for match in matches:
 		game = Game()
-		print ("Processing "+match+" match id")
+		i = i + 1
+		print (str(i)+": Processing "+match+" match id")
 
 		r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/"+match+"?api_key="+RIOT_KEY)
 
@@ -109,7 +110,6 @@ def process_matches():
 				kda = (participant["kills"]+participant["assists"])/max(participant["deaths"], 1)
 				game.kda = round(kda, 1)
 				game.gpm = round(participant["challenges"]["goldPerMinute"],1)
-				i = i + 1
 				total_gpm = total_gpm + participant["challenges"]["goldPerMinute"]
 				total_kda = total_kda + kda
 				if (participant["challenges"]["takedownOnFirstTurret"] == 1):
