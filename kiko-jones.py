@@ -38,13 +38,13 @@ class Game:
 			r = r + "  <font color=\"cornflowerblue\">&uarr;"
 		else:
 			r = r + "  <font color=\"coral\">&darr;" 
-		r = r + str(round(self.gpm - avg_gpm,1))+ "</font></br>"
+		r = r + str(round(self.gpm/avg_gpm,1))+ "x</font></br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
 		if (self.kda > avg_kda):
 			r = r + "  <font color=\"cornflowerblue\">&uarr;"
 		else:
 			r = r + "  <font color=\"coral\">&darr;"
-		r = r + str(round(self.kda - avg_kda,1)) + "</font></br>"
+		r = r + str(round(self.kda/avg_kda,1)) + "x</font></br>"
 		if self.deluxe:
 			r = r + "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
 		if (self.maxCSLead > 30):
