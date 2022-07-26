@@ -144,10 +144,9 @@ def match_history():
 		if(queue["queueType"] == 'RANKED_SOLO_5x5'):
 			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
-	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h2>KIKO JONES<h2>"
-	r = r + "<h3>Match History</h3>"
-	r = r + elo + "<br>"
-	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br></br>"
+	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES<h3>"
+	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br>"
+	r = r + elo + "</br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
 
