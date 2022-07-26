@@ -2,6 +2,7 @@ import requests
 from flask import Flask
 from datetime import datetime
 import os
+import time
 
 app = Flask(__name__)
 
@@ -108,11 +109,14 @@ def process_matches():
 
 	return g, avg_kda, avg_gpm, i, wr
 
-avg_kda = 0
-avg_gpm = 0
-i = 0
-wr = 0
-Games, avg_kda, avg_gpm, i, wr = process_matches()
+while True:
+	print ("Refreshing match history")
+	avg_kda = 0
+	avg_gpm = 0
+	i = 0
+	wr = 0
+	Games, avg_kda, avg_gpm, i, wr = process_matches()
+	time.sleep(600)
 
 @app.route('/refresh')
 def refresh():
