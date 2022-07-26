@@ -18,8 +18,10 @@ class Game:
 		self.deaths = 0
 		self.assists = 0
 		self.deluxe = False
+		self.items = []
 
 	def toHTML(self, avg_kda, avg_gpm):
+		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
 		r = ""
 		if self.deluxe:
 			r = "<font size=\"2\">&#x2B50;  </font>"
@@ -28,6 +30,9 @@ class Game:
 		else:
 			r = r + "<font color=\"red\">LOSS"
 		r = r + "</font>  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
+		for item in items:
+			r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
+		r = r + "</br>"
 		r = r + "  " + str(self.gpm) + "  gpm"
 		if (self.gpm > avg_gpm):
 			r = r + "  <font color=\"blue\">&uarr;"
@@ -81,6 +86,12 @@ def process_matches():
 
 		for participant in rjson["info"]["participants"]:
 			if (participant["summonerName"] == summoner_name):
+				item_iter = 0
+				while item_iter < 6:
+					key = "item"+str(item_iter)
+					if (participant[key] != 0):
+						game.items.append(str(participant[key]))
+					item_iter = item_iter + 1
 				game.win = participant["win"]
 				game.championName = participant["championName"]
 				game.kills = participant["kills"]
