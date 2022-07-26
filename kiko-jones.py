@@ -44,7 +44,7 @@ class Game:
 			r = r + "  <font color=\"coral\">&darr;"
 		r = r + str(round(self.kda - avg_kda,1)) + "</font></br>"
 		if self.deluxe:
-			r = "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
+			r = r + "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
 		r = r + "</br>"
 		return r
 
@@ -144,7 +144,7 @@ def match_history():
 		if(queue["queueType"] == 'RANKED_SOLO_5x5'):
 			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
-	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES<h3>"
+	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
 	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br>"
 	r = r + elo + "</br>"
 	for game in Games:
