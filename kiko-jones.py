@@ -18,6 +18,8 @@ class Game:
 		self.deaths = 0
 		self.assists = 0
 		self.deluxe = False
+		self.maxCSLead = 0
+		self.teamDamageShare = 0
 		self.items = []
 
 	def toHTML(self, avg_kda, avg_gpm):
@@ -45,6 +47,10 @@ class Game:
 		r = r + str(round(self.kda - avg_kda,1)) + "</font></br>"
 		if self.deluxe:
 			r = r + "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
+		if (self.maxCSLead > 30):
+			r = r + "<font size=\"2\">&#x2B50; &mdash; Max CS lead over opponent >30. ("+str(self.maxCSLead)+")</font></br>"
+		if (self.teamDamageShare > 25):
+			r = r + "<font size=\"2\">&#x2B50; &mdash; Team damage share >25%. ("+str(self.teamDamageShare)+"%)</font></br>"
 		r = r + "</br>"
 		return r
 
@@ -64,7 +70,7 @@ summid = rjson["id"]
 
 def process_matches():
 	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=30&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=90&api_key="+RIOT_KEY)
 	matches = r.json()
 
 	i = 0
@@ -98,6 +104,8 @@ def process_matches():
 				game.kills = participant["kills"]
 				game.assists = participant["assists"]
 				game.deaths = participant["deaths"]
+				game.maxCSLead = round(participant["challenges"]["maxCsAdvantageOnLaneOpponent"])
+				game.teamDamageShare = round(participant["challenges"]["teamDamagePercentage"] * 100, 1)
 				kda = (participant["kills"]+participant["assists"])/max(participant["deaths"], 1)
 				game.kda = round(kda, 1)
 				game.gpm = round(participant["challenges"]["goldPerMinute"],1)
@@ -145,7 +153,7 @@ def match_history():
 			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
 	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
-	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games  | "+str(wr)+"% wins</br>"
+	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games processed  | "+str(wr)+"% wins</br>"
 	r = r + elo + "</br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
