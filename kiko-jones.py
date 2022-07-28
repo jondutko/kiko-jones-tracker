@@ -137,7 +137,7 @@ avg_kda = 0
 avg_gpm = 0
 i = 0
 wr = 0
-Games, avg_kda, avg_gpm, i, wr = process_matches()
+Games, avg_kda, avg_gpm, i, wr = process_matches(puuid)
 
 @app.route('/refresh')
 def refresh():
