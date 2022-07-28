@@ -38,13 +38,13 @@ class Game:
 			r = r + "  <font color=\"cornflowerblue\">&uarr;"
 		else:
 			r = r + "  <font color=\"coral\">&darr;" 
-		r = r + str(round(self.gpm/avg_gpm,1))+ "x</font></br>"
+		r = r + str(round(abs(1-(self.gpm/avg_gpm)),1))+ "x</font></br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
 		if (self.kda > avg_kda):
 			r = r + "  <font color=\"cornflowerblue\">&uarr;"
 		else:
 			r = r + "  <font color=\"coral\">&darr;"
-		r = r + str(round(self.kda/avg_kda,1)) + "x</font></br>"
+		r = r + str(round(abs(1-(self.kda/avg_kda)),1)) + "x</font></br>"
 		if self.deluxe:
 			r = r + "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
 		if (self.maxCSLead > 30):
@@ -68,9 +68,11 @@ rjson = r.json()
 puuid = rjson["puuid"]
 summid = rjson["id"]
 
-def process_matches():
+
+
+def process_matches(puuid):
 	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=50&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=100&api_key="+RIOT_KEY)
 	matches = r.json()
 
 	i = 0
@@ -79,8 +81,9 @@ def process_matches():
 	total_win = 0
 
 	for match in matches:
+		time.sleep(1)
 		game = Game()
-		i = i + 1
+		i = i + 2
 		print (str(i)+": Processing "+match+" match id")
 
 		r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/"+match+"?api_key="+RIOT_KEY)
@@ -93,7 +96,7 @@ def process_matches():
 		game.date = datetime.fromtimestamp(unix_timestamp).strftime('%a %b %d')
 
 		for participant in rjson["info"]["participants"]:
-			if (participant["summonerName"] == summoner_name):
+			if (participant["puuid"] == puuid):
 				item_iter = 0
 				while item_iter < 6:
 					key = "item"+str(item_iter)
@@ -153,7 +156,8 @@ def match_history():
 			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
 			 
 	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
-	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm  | "+str(i)+" games processed  | "+str(wr)+"% wins</br>"
+	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm</br>"
+	r = r + str(i)+" games processed  | "+str(wr)+"% wins</br>"
 	r = r + elo + "</br>"
 	for game in Games:
 		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
