@@ -72,7 +72,7 @@ summid = rjson["id"]
 
 def process_matches(puuid):
 	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=100&api_key="+RIOT_KEY)
+	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=80&api_key="+RIOT_KEY)
 	matches = r.json()
 
 	i = 0
