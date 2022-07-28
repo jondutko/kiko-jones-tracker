@@ -83,7 +83,7 @@ def process_matches(puuid):
 	for match in matches:
 		time.sleep(1)
 		game = Game()
-		i = i + 2
+		i = i + 1
 		print (str(i)+": Processing "+match+" match id")
 
 		r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/"+match+"?api_key="+RIOT_KEY)
