@@ -6,161 +6,19 @@ import time
 
 app = Flask(__name__)
 
-class Game:
-	def __init__(self):
-		self.win = True
-		self.date = ""
-		self.minutes = 0
-		self.championName = "None"
-		self.gpm = 0
-		self.kda = 0
-		self.kills = 0
-		self.deaths = 0
-		self.assists = 0
-		self.deluxe = False
-		self.maxCSLead = 0
-		self.teamDamageShare = 0
-		self.items = []
-
-	def toHTML(self, avg_kda, avg_gpm):
-		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = ""
-		if self.win:
-			r = r + "<font color=\"cornflowerblue\">WIN"
-		else:
-			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font>  " + self.championName + "  " + str(self.minutes) + "m -- "+self.date+"</br>"
-		for item in self.items:
-			r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
-		r = r + "</br>"
-		r = r + "  " + str(self.gpm) + "  gpm"
-		if (self.gpm > avg_gpm):
-			r = r + "  <font color=\"cornflowerblue\">&uarr;"
-		else:
-			r = r + "  <font color=\"coral\">&darr;" 
-		r = r + str(round(abs(1-(self.gpm/avg_gpm)),1))+ "x</font></br>"
-		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"  ("+str(self.kda)+" kda)"
-		if (self.kda > avg_kda):
-			r = r + "  <font color=\"cornflowerblue\">&uarr;"
-		else:
-			r = r + "  <font color=\"coral\">&darr;"
-		r = r + str(round(abs(1-(self.kda/avg_kda)),1)) + "x</font></br>"
-		if self.deluxe:
-			r = r + "<font size=\"2\">&#x2B50; &mdash; Killed first turret.</font></br>"
-		if (self.maxCSLead > 30):
-			r = r + "<font size=\"2\">&#x2B50; &mdash; Max CS lead over opponent >30. ("+str(self.maxCSLead)+")</font></br>"
-		if (self.teamDamageShare > 25):
-			r = r + "<font size=\"2\">&#x2B50; &mdash; Team damage share >25%. ("+str(self.teamDamageShare)+"%)</font></br>"
-		r = r + "</br>"
-		return r
-
-	
-Games = []
-
-RIOT_KEY = os.environ['RIOT_API_KEY']
-summoner_name = "KIKO JONES"
-summoner_name_html_safe = "KIKO%20JONES"
-
-r = requests.get("https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+summoner_name_html_safe+"?api_key="+RIOT_KEY)
-
-rjson = r.json()
-
-puuid = rjson["puuid"]
-summid = rjson["id"]
-
-
-
-def process_matches(puuid):
-	g  = []
-	r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"+puuid+"/ids?start=0&count=80&api_key="+RIOT_KEY)
-	matches = r.json()
-
-	i = 0
-	total_kda = 0
-	total_gpm = 0
-	total_win = 0
-
-	for match in matches:
-		time.sleep(1)
-		game = Game()
-		i = i + 1
-		print (str(i)+": Processing "+match+" match id")
-
-		r = requests.get("https://americas.api.riotgames.com/lol/match/v5/matches/"+match+"?api_key="+RIOT_KEY)
-
-		rjson = r.json()
-
-		game.minutes = round(rjson["info"]["gameDuration"]/60)
-		unix_timestamp = rjson["info"]["gameEndTimestamp"]
-		unix_timestamp = unix_timestamp/1000
-		game.date = datetime.fromtimestamp(unix_timestamp).strftime('%a %b %d')
-
-		for participant in rjson["info"]["participants"]:
-			if (participant["puuid"] == puuid):
-				item_iter = 0
-				while item_iter < 6:
-					key = "item"+str(item_iter)
-					if (participant[key] != 0):
-						game.items.append(str(participant[key]))
-					item_iter = item_iter + 1
-				game.win = participant["win"]
-				game.championName = participant["championName"]
-				game.kills = participant["kills"]
-				game.assists = participant["assists"]
-				game.deaths = participant["deaths"]
-				game.maxCSLead = round(participant["challenges"]["maxCsAdvantageOnLaneOpponent"])
-				game.teamDamageShare = round(participant["challenges"]["teamDamagePercentage"] * 100, 1)
-				kda = (participant["kills"]+participant["assists"])/max(participant["deaths"], 1)
-				game.kda = round(kda, 1)
-				game.gpm = round(participant["challenges"]["goldPerMinute"],1)
-				total_gpm = total_gpm + participant["challenges"]["goldPerMinute"]
-				total_kda = total_kda + kda
-				if (participant["challenges"]["takedownOnFirstTurret"] == 1):
-					game.deluxe = True
-				if game.win:
-					total_win = total_win + 1
-
-		g.append(game)
-
-	wr = round((total_win/i) * 100)
-	avg_kda = round(total_kda/i, 1)
-	avg_gpm = round(total_gpm/i, 1)
-
-	print (str(total_win)+" wins\t"+str(wr)+"%")
-	print ("avg kda: "+str(avg_kda))
-	print ("avg gpm: "+str(avg_gpm))
-
-	return g, avg_kda, avg_gpm, i, wr
-
-print ("Refreshing match history")
-avg_kda = 0
-avg_gpm = 0
-i = 0
-wr = 0
-Games, avg_kda, avg_gpm, i, wr = process_matches(puuid)
-
-@app.route('/refresh')
-def refresh():
-	Games = process_matches()
-	return "Games set refreshed"
-
 @app.route('/')
 def match_history():
-	
-	r = requests.get("https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/"+summid+"?api_key="+RIOT_KEY)
-	rjson = r.json()
-	elo = ""	
-	for queue in rjson:
-		print (queue)
-		if(queue["queueType"] == 'RANKED_SOLO_5x5'):
-			elo = elo + queue["tier"] + " " + queue["rank"] + " " +str(queue["leaguePoints"]) + "LP</br>"
-			 
-	r = "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
-	r = r + str(avg_kda) + " avg kda  | "+str(avg_gpm)+" avg gpm</br>"
-	r = r + str(i)+" games processed  | "+str(wr)+"% wins</br>"
-	r = r + elo + "</br>"
-	for game in Games:
-		r = r + game.toHTML(avg_kda, avg_gpm) + "\n"
+	#GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+	GOOGLE_API_KEY = "AIzaSyCnX0UZyag_7Kfx0mLyblr7WnF_SqWluTE"
+	#SHEET_ID = os.environ['SHEET_ID']
+	SHEET_ID = "14GD1vi82SRnKD5aVw-q4PcQF3t895HPd2OjS2krpPsc"
 
-	r = r + "</body></html>"
-	return r
+	headers = {'Authorization': 'Bearer '+api_key}
+	spreadsheet = requests.get("https://sheets.googleapis.com/v4/spreadsheets/"+SHEET_ID+"/values/A1:F20?key="+GOOGLE_API_KEY)
+	data = spreadsheet.json()
+	matches = data["values"]
+	for match in matches:
+		for item in match:
+			print (item)
+
+	return "Check the Heroku logs."
