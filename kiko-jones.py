@@ -7,8 +7,9 @@ import time
 app = Flask(__name__)
 
 def match_to_html(match):
+	print(match)
 	r = ""
-	if match[1]:
+	if match[1] == "TRUE":
 		r = r + "<font color=\"cornflowerblue\">WIN"
 	else:
 		r = r + "<font color=\"coral\">LOSS"
