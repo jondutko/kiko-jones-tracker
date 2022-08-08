@@ -29,7 +29,15 @@ class Game:
 		self.items.append(match[14])
 	
 	def detailedHTML(self):
-		r = "<h3>"+self.matchID+"</h3>"
+		r = "<h3>"
+		if self.win == "TRUE":
+			r = r + "<font color=\"cornflowerblue\">WIN"
+		else:
+			r = r + "<font color=\"coral\">LOSS"
+		r = r + "</font></h3>"
+		for item in self.items:
+			if item != "0":
+				r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
 		return r
 		
 	def toHtml(self):
@@ -43,9 +51,7 @@ class Game:
 		r = r + self.date + " (" + str(self.minutes) + " min)</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</button></br>"
 		
-		#for item in self.items:
-		#	if item != "0":
-		#		r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
+
 		r = r + "</br>"
 		
 		return r
