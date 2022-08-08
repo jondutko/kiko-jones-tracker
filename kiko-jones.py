@@ -19,8 +19,17 @@ class Game:
 		self.kills = match[5]
 		self.deaths = match[6]
 		self.assists = match[7]
-
+		self.items = []
+		self.items.append(match[8])
+		self.items.append(match[9])
+		self.items.append(match[10])
+		self.items.append(match[11])
+		self.items.append(match[12])
+		self.items.append(match[13])
+		self.items.append(match[14])
+		
 	def toHtml(self):
+		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
 		r = ""
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
@@ -29,7 +38,11 @@ class Game:
 		r = r + "</font>  " + self.champ + "</br>"
 		r = r + self.date + " (" + str(self.minutes) + "min " + str(self.seconds) + "sec)</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
+		
+		for item in self.items:
+			r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
 		r = r + "</br>"
+		
 		return r
 
 def addHeader(r):
