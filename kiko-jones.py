@@ -40,8 +40,9 @@ class Game:
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
 		
 		for item in self.items:
-			r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
-		r = r + "</br>"
+			if item != "0":
+				r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
+		r = r + "</br></br>"
 		
 		return r
 
