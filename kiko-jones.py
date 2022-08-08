@@ -30,7 +30,7 @@ class Game:
 		
 	def toHtml(self):
 		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = "<button onclick=\"details()\">"
+		r = "<button style=\"border-radius:0px\" onclick=\"details()\">"
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
@@ -42,7 +42,7 @@ class Game:
 		#for item in self.items:
 		#	if item != "0":
 		#		r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
-		r = r + "</br></br>"
+		r = r + "</br>"
 		
 		return r
 
@@ -74,7 +74,7 @@ def match_history():
 	for match in matches:
 		g = Game(match)
 		r = r + g.toHtml()
-	r = r + "</td><td>"
+	r = r + "</td><td VALIGN=TOP>"
 	r = addDetails(r)
 	r = r + "</td></tr></table>"
 	r = addFooter(r)
