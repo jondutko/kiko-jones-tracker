@@ -30,18 +30,18 @@ class Game:
 		
 	def toHtml(self):
 		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = ""
+		r = "<button onclick=\"details()\">"
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
 			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font>  " + self.champ + " - <button onclick=\"details()\">Details</button></br>"
+		r = r + "</font>  " + self.champ + "</br>"
 		r = r + self.date + " (" + str(self.minutes) + " min)</br>"
-		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
+		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</button></br>"
 		
-		for item in self.items:
-			if item != "0":
-				r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
+		#for item in self.items:
+		#	if item != "0":
+		#		r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
 		r = r + "</br></br>"
 		
 		return r
@@ -70,12 +70,12 @@ def match_history():
 	matches = data["values"]
 	r = ""
 	r = addHeader(r)
-	r = r + "<table style=\"width:100%\"><tr><th style=\"width:30%\">"
+	r = r + "<table style=\"width:100%\"><tr><td style=\"width:30%\">"
 	for match in matches:
 		g = Game(match)
 		r = r + g.toHtml()
-	r = r + "</th><th>"
+	r = r + "</td><td>"
 	r = addDetails(r)
-	r = r + "</th></tr></table>"
+	r = r + "</td></tr></table>"
 	r = addFooter(r)
 	return r
