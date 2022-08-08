@@ -52,7 +52,7 @@ def addHeader(r):
 	return r
 
 def addFooter(r):
-	r = r + "<p id="demo"></p>"
+	r = r + "<p id=\"demo\"></p>"
 	r = r + "</body></html>"
 	return r
 
