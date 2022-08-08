@@ -29,7 +29,7 @@ class Game:
 		self.items.append(match[14])
 	
 	def detailedHTML(self):
-		r = "<h3>"+self.matchID+"</h3>"
+		r = "\"<h3>"+self.matchID+"</h3>\""
 		return r
 		
 	def toHtml(self):
