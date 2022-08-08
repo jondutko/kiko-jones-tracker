@@ -35,10 +35,11 @@ class Game:
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
 			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font></h3>"
+		r = r + "</font></h3></br>"
 		for item in self.items:
 			if item != "0":
 				r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
+		print (r)
 		return r
 		
 	def toHtml(self):
