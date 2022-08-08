@@ -27,10 +27,14 @@ class Game:
 		self.items.append(match[12])
 		self.items.append(match[13])
 		self.items.append(match[14])
+	
+	def detailedHTML(self):
+		r = "<h3>"+self.matchID+"</h3>"
+		return r
 		
 	def toHtml(self):
 		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = "<button style=\"border-radius:0px\" onclick=\"details()\">"
+		r = "<button style=\"border-radius:0px\" onclick=\"details(" + self.detailedHTML()+ ")\">"
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
@@ -48,7 +52,7 @@ class Game:
 
 def addHeader(r):
 	r = r + "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif;-webkit-appearance: none\"><h3>KIKO JONES</h3>"
-	r = r + "<script>function details() {document.getElementById(\"demo\").innerHTML = \"Hello World\";}</script>"
+	r = r + "<script>function details(data) {document.getElementById(\"demo\").innerHTML = data;}</script>"
 	return r
 
 def addDetails(r):
