@@ -26,7 +26,7 @@ class Game:
 		else:
 			r = r + "<font color=\"coral\">LOSS"
 		r = r + "</font>  " + self.champ + "</br>"
-		r = r + self.date + " (" + self.minutes + ")</br>"
+		r = r + self.date + " (" + str(self.minutes) + ")</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
 		r = r + "</br>"
 		return r
