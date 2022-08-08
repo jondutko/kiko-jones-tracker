@@ -10,9 +10,9 @@ class Game:
 	def __init__(self, match):
 		self.matchID = match[0]
 		self.timestamp = match[1]
-		self.date = datetime.fromtimestamp(match[1]/1000).strftime('%a %b %d')
+		self.date = datetime.fromtimestamp(int(match[1])/1000).strftime('%a %b %d')
 		self.duration = match[2]
-		self.minutes = round(match[2]/60)
+		self.minutes = round(int(match[2])/60)
 		self.win = match[3]
 		self.champ = match[4]
 		self.kills = match[5]
