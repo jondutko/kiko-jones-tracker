@@ -47,7 +47,7 @@ class Game:
 		return r
 
 def addHeader(r):
-	r = r + "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
+	r = r + "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif;-webkit-appearance: none\"><h3>KIKO JONES</h3>"
 	r = r + "<script>function details() {document.getElementById(\"demo\").innerHTML = \"Hello World\";}</script>"
 	return r
 
