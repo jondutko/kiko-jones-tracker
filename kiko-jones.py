@@ -35,7 +35,7 @@ class Game:
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
 			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font>  " + self.champ + "<button onclick="details()">Details</button></br>"
+		r = r + "</font>  " + self.champ + "<button onclick=\"details()\">Details</button></br>"
 		r = r + self.date + " (" + str(self.minutes) + " min)</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
 		
