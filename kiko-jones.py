@@ -13,6 +13,7 @@ class Game:
 		self.date = datetime.fromtimestamp(int(match[1])/1000).strftime('%a %b %d')
 		self.duration = match[2]
 		self.minutes = round(int(match[2])/60)
+		self.seconds = int(match[2]) % 60
 		self.win = match[3]
 		self.champ = match[4]
 		self.kills = match[5]
@@ -26,7 +27,7 @@ class Game:
 		else:
 			r = r + "<font color=\"coral\">LOSS"
 		r = r + "</font>  " + self.champ + "</br>"
-		r = r + self.date + " (" + str(self.minutes) + ")</br>"
+		r = r + self.date + " (" + str(self.minutes) + "min " + str(self.seconds) + "sec)</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
 		r = r + "</br>"
 		return r
