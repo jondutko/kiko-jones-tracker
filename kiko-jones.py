@@ -35,7 +35,7 @@ class Game:
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
 			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font>  " + self.champ + "</br>"
+		r = r + "</font>  " + self.champ + "<button onclick="details()">Details</button></br>"
 		r = r + self.date + " (" + str(self.minutes) + " min)</br>"
 		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</br>"
 		
@@ -48,9 +48,11 @@ class Game:
 
 def addHeader(r):
 	r = r + "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif\"><h3>KIKO JONES</h3>"
+	r = r + "<script>function myFunction() {document.getElementById("demo").innerHTML = "Hello World";}</script>"
 	return r
 
 def addFooter(r):
+	r = r + "<p id="demo"></p>"
 	r = r + "</body></html>"
 	return r
 
