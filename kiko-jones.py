@@ -51,8 +51,11 @@ def addHeader(r):
 	r = r + "<script>function details() {document.getElementById(\"demo\").innerHTML = \"Hello World\";}</script>"
 	return r
 
-def addFooter(r):
+def addDetails(r):
 	r = r + "<p id=\"demo\"></p>"
+	return r
+
+def addFooter(r):
 	r = r + "</body></html>"
 	return r
 
@@ -67,8 +70,12 @@ def match_history():
 	matches = data["values"]
 	r = ""
 	r = addHeader(r)
+	r = r + "<table style=\"width:100%\"><tr><th style=\"width:30%\">"
 	for match in matches:
 		g = Game(match)
 		r = r + g.toHtml()
+	r = r + "</th><th>"
+	r = addDetails(r)
+	r = r + "</th></tr></table>"
 	r = addFooter(r)
 	return r
