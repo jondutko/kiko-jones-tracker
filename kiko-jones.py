@@ -29,12 +29,12 @@ class Game:
 		self.items.append(match[14])
 	
 	def detailedHTML(self):
-		r = "\"<h3>"+self.matchID+"</h3>\""
+		r = "<h3>"+self.matchID+"</h3>"
 		return r
 		
 	def toHtml(self):
 		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = "<button style=\"border-radius:0px\" onclick=\"details(" + self.detailedHTML()+ ")\">"
+		r = "<button style=\"border-radius:0px\" onclick=\"details('" + self.detailedHTML()+ "')\">"
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
