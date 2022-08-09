@@ -43,7 +43,7 @@ class Game:
 		return r
 		
 	def toHtml(self):
-		r = "<button style=\"border-radius:0px\" onclick=\"details('" + self.detailedHTML()+ "')\">"
+		r = ""
 		if self.win == "TRUE":
 			r = r + "<font color=\"cornflowerblue\">WIN"
 		else:
