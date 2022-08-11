@@ -2,10 +2,9 @@
 {% block content %}
 <body style="background-color:black;color:white;font-family:Helvetica, sans-serif"><h3>KIKO JONES GAME TRACKER</h3>
 <h4>last {{ games|length }} games</h4>
-<table><tr><td style="width:40%">
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
 {% for game in games %}
-	<div class="panel panel-default" style="width:100%; background-color:slategray">
+	<div class="panel panel-default" style="background-color:slategray">
 	    <div class="panel-heading" role="tab" style="background-color:darkslategray">
 	      <h4 class="panel-title" style="background-color:darkslategray">
 		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
@@ -32,5 +31,4 @@
 	  </div>
 {% endfor %}
 </div>
-</td><td></td></tr></table>
 {% endblock %}
