@@ -1,20 +1,31 @@
 {% extends "bootstrap/base.html" %}
 {% block content %}
+<body style="background-color:black;color:white;font-family:Helvetica, sans-serif"><h3>KIKO JONES</h3>
+<table><tr><td style="width:40%">
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	{% for game in games %}
-		<div class="panel panel-default">
-		    <div class="panel-heading" role="tab">
-		      <h4 class="panel-title">
-		        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
-		          {{ game.timestamp }}
-		        </a>
-		      </h4>
-		    </div>
-		    <div id="collapse{{ game.timestamp }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ game.timestamp }}">
-		      <div class="panel-body">
-		        {{ game.win }}
-		      </div>
-		    </div>
-		  </div>
-	{% endfor %}
+{% for game in games %}
+	<div class="panel panel-default">
+	    <div class="panel-heading" role="tab">
+	      <h4 class="panel-title">
+		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
+		{% if game.win is 'TRUE' %}
+			WIN
+		{% else %}
+			LOSS
+		{% endif %}
+		{{ game.date }} -- {{ game.champ }} -- {{ game.minutes }} minutes
+		</a>
+	      </h4>
+	    </div>
+	    <div id="collapse{{ game.timestamp }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ game.timestamp }}">
+	      <div class="panel-body">
+		{% for item in game.items %}
+			<img src="https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/{{ item }}.png" width="32" height="32">
+		{% endfor %}
+	      </div>
+	    </div>
+	  </div>
+{% endfor %}
+</div>
+</td><td></td></tr></table>
 {% endblock %}
