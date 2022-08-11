@@ -1,10 +1,12 @@
 import requests
-from flask import Flask
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 from datetime import datetime
 import os
 import time
 
 app = Flask(__name__)
+Bootstrap(app)
 
 class Game:
 	def __init__(self, match):
@@ -79,14 +81,8 @@ def match_history():
 	spreadsheet = requests.get("https://sheets.googleapis.com/v4/spreadsheets/"+SHEET_ID+"/values/A1:P20?key="+GOOGLE_API_KEY)
 	data = spreadsheet.json()
 	matches = data["values"]
-	r = ""
-	r = addHeader(r)
-	r = r + "<table style=\"width:100%\"><tr><td style=\"width:30%\">"
+	Games = []
 	for match in matches:
 		g = Game(match)
-		r = r + g.toHtml()
-	r = r + "</td><td VALIGN=TOP>"
-	r = addDetails(r)
-	r = r + "</td></tr></table>"
-	r = addFooter(r)
-	return r
+		Games.append(g)
+	return render_template('index.html', games=Games)
