@@ -8,10 +8,10 @@
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
-		{% if game.win is 'TRUE' %}
-			WIN
+		{% if game.win %}
+			WIN </br>
 		{% else %}
-			LOSS
+		        LOSS </br>
 		{% endif %}
 		{{ game.date }} -- {{ game.champ }} -- {{ game.minutes }} minutes
 		</a>
