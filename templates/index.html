@@ -8,16 +8,16 @@
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
-		{% if game.win %}
+		{% if game.win == "TRUE" %}
 			WIN </br>
 		{% else %}
 		        LOSS </br>
 		{% endif %}
-		{{ game.date }} -- {{ game.champ }} -- {{ game.minutes }} minutes
+		{{ game.date }} {{ game.champ }} {{ game.minutes }} minutes
 		</a>
 	      </h4>
 	    </div>
-	    <div id="collapse{{ game.timestamp }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ game.timestamp }}">
+	    <div id="collapse{{ game.timestamp }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ game.timestamp }}">
 	      <div class="panel-body">
 		{% for item in game.items %}
 			<img src="https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/{{ item }}.png" width="32" height="32">
