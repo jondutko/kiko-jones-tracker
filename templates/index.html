@@ -4,16 +4,16 @@
 <table><tr><td style="width:40%">
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 {% for game in games %}
-	<div class="panel panel-default">
+	<div class="panel panel-default" style="width:100%">
 	    <div class="panel-heading" role="tab">
 	      <h4 class="panel-title">
 		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
 		{% if game.win == "TRUE" %}
-			WIN </br>
+			WIN | 
 		{% else %}
-		        LOSS </br>
+		        LOSS | 
 		{% endif %}
-		{{ game.date }} {{ game.champ }} {{ game.minutes }} minutes
+		{{ game.date }} | {{ game.champ }} | {{ game.minutes }} minutes
 		</a>
 	      </h4>
 	    </div>
