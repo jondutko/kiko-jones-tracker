@@ -30,47 +30,6 @@ class Game:
 		self.items.append(match[13])
 		self.items.append(match[14])
 	
-	def detailedHTML(self):
-		item_datadragon = "https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/"
-		r = "<h3>"
-		if self.win == "TRUE":
-			r = r + "<font color=\"cornflowerblue\">WIN"
-		else:
-			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font></h3></br>"
-		for item in self.items:
-			if item != "0":
-				r = r + "<img src=\""+item_datadragon+item+".png\" width=\"32\" height=\"32\">"
-		print (r)
-		return r
-		
-	def toHtml(self):
-		r = ""
-		if self.win == "TRUE":
-			r = r + "<font color=\"cornflowerblue\">WIN"
-		else:
-			r = r + "<font color=\"coral\">LOSS"
-		r = r + "</font>  " + self.champ + "</br>"
-		r = r + self.date + " (" + str(self.minutes) + " min)</br>"
-		r = r + "  " + str(self.kills) + "/" + str(self.deaths)+"/"+str(self.assists)+"</button></br>"
-		
-
-		r = r + "</br>"
-		
-		return r
-
-def addHeader(r):
-	r = r + "<html><body style=\"background-color:black;color:white;font-family:Helvetica, sans-serif;-webkit-appearance: none\"><h3>KIKO JONES</h3>"
-	r = r + "<script>function details(data) {document.getElementById(\"demo\").innerHTML = data;}</script>"
-	return r
-
-def addDetails(r):
-	r = r + "<p id=\"demo\"></p>"
-	return r
-
-def addFooter(r):
-	r = r + "</body></html>"
-	return r
 
 @app.route('/')
 def match_history():
