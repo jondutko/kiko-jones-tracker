@@ -14,7 +14,8 @@ class Rune:
 		self.json = ""
 		for category in runesreforged:
 			for slot in category:
-				if slot["id"] == self.id:
+				print (slot)
+				if slot.id == self.id:
 					self.json = slot
 		self.name = self.json.name
 		self.icon = self.json.icon
