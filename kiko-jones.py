@@ -15,11 +15,12 @@ class Rune:
 		for category in runesreforged:
 			#print (category)
 			for slot in category["slots"]:
-				print (slot)
-				if slot["id"] == self.id:
-					self.json = slot
-		self.name = self.json.name
-		self.icon = self.json.icon
+				for rune in slot["runes"]:
+					print (rune)
+					if rune["id"] == self.id:
+						self.json = slot
+		self.name = self.json["name"]
+		self.icon = self.json["icon"]
 		
 
 class Game:
