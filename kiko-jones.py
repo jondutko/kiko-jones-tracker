@@ -42,12 +42,12 @@ class Game:
 		self.items.append(match[13])
 		self.items.append(match[14])
 		self.runes = []
-		self.runes.append(Rune(match[15]))
-		self.runes.append(Rune(match[16]))
-		self.runes.append(Rune(match[17]))
-		self.runes.append(Rune(match[18]))
-		self.runes.append(Rune(match[19]))
-		self.runes.append(Rune(match[20]))
+		self.runes.append(Rune(match[15], runesreforged))
+		self.runes.append(Rune(match[16], runesreforged))
+		self.runes.append(Rune(match[17], runesreforged))
+		self.runes.append(Rune(match[18], runesreforged))
+		self.runes.append(Rune(match[19], runesreforged))
+		self.runes.append(Rune(match[20], runesreforged))
 		print (self.runes[0].name+" "+self.runes[0].icon)
 	
 
