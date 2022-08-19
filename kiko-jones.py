@@ -13,10 +13,11 @@ class Rune:
 		self.id = id
 		self.json = ""
 		for category in runesreforged:
-			for slot in category:
-				print (slot)
-				if slot.id == self.id:
-					self.json = slot
+			print (category)
+			#for slot in category:
+			#	print (slot)
+			#	if slot.id == self.id:
+			#		self.json = slot
 		self.name = self.json.name
 		self.icon = self.json.icon
 		
