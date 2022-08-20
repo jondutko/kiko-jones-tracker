@@ -64,9 +64,9 @@ def analysis(Games):
 		else:
 			tracked_champs[game.champ] = ChampTracker(game.champ)
 		if game.win == "TRUE":
-			tracked_champs[game.champ].update_with_win
+			tracked_champs[game.champ].update_with_win()
 		else:
-			tracked_champs[game.champ].update_with_loss
+			tracked_champs[game.champ].update_with_loss()
 	return tracked_champs
 
 @app.route('/')
