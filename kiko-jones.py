@@ -68,7 +68,7 @@ def analysis(Games):
 		else:
 			tracked_champs[game.champ].update_with_loss()
 	champlist = list(tracked_champs.values())
-	champlist.sort(key=lambda x: x.games_played)
+	champlist.sort(key=lambda x: x.games_played, reverse=True)
 	return champlist
 
 @app.route('/')
