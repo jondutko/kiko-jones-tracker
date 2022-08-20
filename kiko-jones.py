@@ -16,9 +16,10 @@ class Rune:
 			#print (category)
 			for slot in category["slots"]:
 				for rune in slot["runes"]:
-					print (rune)
+					#print (rune)
 					if rune["id"] == self.id:
-						self.json = slot
+						print (rune)
+						self.json = rune
 		self.name = self.json["name"]
 		self.icon = self.json["icon"]
 		
