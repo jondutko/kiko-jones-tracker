@@ -27,7 +27,9 @@
 		      {% endif %}
 		{% endfor %}
 		</br>
-		{{ game.kills }} kills, {{ game.deaths }} deaths, {{ game.assists }} assists
+		{% for rune in game.runes %}
+		    <img src="https://ddragon.canisback.com/img/{{ rune }}" width="32" height="32">
+		{% endfor %}
 	      </div>
 	    </div>
 	  </div>
