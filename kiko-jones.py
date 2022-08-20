@@ -77,7 +77,7 @@ def match_history():
 	SHEET_ID = os.environ['SHEET_ID']
 
 	headers = {'Authorization': 'Bearer '+GOOGLE_API_KEY}
-	spreadsheet = requests.get("https://sheets.googleapis.com/v4/spreadsheets/"+SHEET_ID+"/values/A1:V30?key="+GOOGLE_API_KEY)
+	spreadsheet = requests.get("https://sheets.googleapis.com/v4/spreadsheets/"+SHEET_ID+"/values/A1:V50?key="+GOOGLE_API_KEY)
 	data = spreadsheet.json()
 	matches = data["values"]
 	Games = []
