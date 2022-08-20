@@ -57,7 +57,7 @@ class ChampTracker:
 		self.ratio = round(self.wins/self.games_played)
 		
 def analysis(Games):
-	tracked_champs = []
+	tracked_champs = {}
 	for game in Games:
 		if game.champ in tracked_champs:
 			pass
