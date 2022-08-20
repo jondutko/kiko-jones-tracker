@@ -3,7 +3,7 @@
 <body style="background-color:black;color:white;font-family:Helvetica, sans-serif;padding: 20px"><h3>KIKO JONES GAME TRACKER</h3>
 <h4>last {{ games|length }} games</h4>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
-	<div class="well" style="background-color:slategray"><table>
+	<div class="well" style="background-color:slategray"><table style="border-spacing: 3px">
 	{% for value in analysis %}
 		<tr><td>
 		<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
