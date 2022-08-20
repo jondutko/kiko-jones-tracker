@@ -11,6 +11,7 @@ Bootstrap(app)
 class Rune:
 	def __init__(self, id, runesreforged):
 		self.id = id
+		print (id)
 		self.json = ""
 		for category in runesreforged:
 			#print (category)
