@@ -39,7 +39,8 @@ class Game:
 		self.runes.append(match[20])
 
 class ChampTracker:
-	def __init__(self):
+	def __init__(self, champ):
+		self.name = champ
 		self.wins = 0
 		self.losses = 0
 		self.games_played = 0
@@ -61,7 +62,7 @@ def analysis(Games):
 		if game.champ in tracked_champs:
 			pass
 		else:
-			tracked_champs[game.champ] = ChampTracker()
+			tracked_champs[game.champ] = ChampTracker(game.champ)
 		if game.win == "TRUE":
 			tracked_champs[game.champ].update_with_win
 		else:
