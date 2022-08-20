@@ -37,7 +37,36 @@ class Game:
 		self.runes.append(match[18])
 		self.runes.append(match[19])
 		self.runes.append(match[20])
+
+class ChampTracker:
+	def __init__(self):
+		self.wins = 0
+		self.losses = 0
+		self.games_played = 0
+		self.ratio = 0
 	
+	def update_with_win(self):
+		self.wins = self.wins + 1
+		self.games_played = self.games_played + 1
+		self.ratio = round(self.wins/self.games_played)
+	
+	def update_with_loss(self):
+		self.losses = self.losses + 1
+		self.games_played = self.games_played + 1
+		self.ratio = round(self.wins/self.games_played)
+		
+def analysis(Games):
+	tracked_champs = []
+	for game in Games:
+		if game.champ in tracked_champs:
+			pass
+		else:
+			tracked_champs[game.champ] = ChampTracker()
+		if game.win == "TRUE":
+			tracked_champs[game.champ].update_with_win
+		else:
+			tracked_champs[game.champ].update_with_loss
+	return tracked_champs
 
 @app.route('/')
 def match_history():
@@ -52,4 +81,5 @@ def match_history():
 	for match in matches:
 		g = Game(match)
 		Games.append(g)
-	return render_template('index.html', games=Games)
+	Analysis = analysis(Games)
+	return render_template('index.html', games=Games, analysis=Analysis)
