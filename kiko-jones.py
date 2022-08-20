@@ -49,12 +49,12 @@ class ChampTracker:
 	def update_with_win(self):
 		self.wins = self.wins + 1
 		self.games_played = self.games_played + 1
-		self.ratio = round(self.wins/self.games_played)
+		self.ratio = round((self.wins/self.games_played)*100)
 	
 	def update_with_loss(self):
 		self.losses = self.losses + 1
 		self.games_played = self.games_played + 1
-		self.ratio = round(self.wins/self.games_played)
+		self.ratio = round((self.wins/self.games_played)*100)
 		
 def analysis(Games):
 	tracked_champs = {}
