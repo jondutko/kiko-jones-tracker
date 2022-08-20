@@ -10,7 +10,7 @@ Bootstrap(app)
 	
 
 class Game:
-	def __init__(self, match, runesreforged):
+	def __init__(self, match):
 		self.matchID = match[0]
 		self.timestamp = match[1]
 		self.date = datetime.fromtimestamp(int(match[1])/1000).strftime('%a %b %d')
