@@ -3,9 +3,9 @@
 <body style="background-color:black;color:white;font-family:Helvetica, sans-serif;padding: 20px"><h3>KIKO JONES GAME TRACKER</h3>
 <h4>last {{ games|length }} games</h4>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
-	<div class="well">
+	<div class="well" style="background-color:slategray">
 	{% for champ in analysis %}
-	<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ champ.name }}.png" width="32" height="32"> {{ champ.wins }}w / {{ champ.losses }} ({{champ.ratio}}%)</br>
+		<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ champ.name }}.png" width="32" height="32"> {{ champ.wins }}w / {{ champ.losses }} ({{champ.ratio}}%)</br>
 	{% endfor %}
 	</div>
 	{% for game in games %}
