@@ -67,7 +67,9 @@ def analysis(Games):
 			tracked_champs[game.champ].update_with_win()
 		else:
 			tracked_champs[game.champ].update_with_loss()
-	return tracked_champs
+	champlist = list(tracked_champs.values())
+	champlist.sort(key=lambda x: x.games_played)
+	return champlist
 
 @app.route('/')
 def match_history():
