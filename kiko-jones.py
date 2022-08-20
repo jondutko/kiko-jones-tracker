@@ -67,6 +67,8 @@ def analysis(Games):
 			tracked_champs[game.champ].update_with_win
 		else:
 			tracked_champs[game.champ].update_with_loss
+	for champ in tracked_champs:
+		print (champ.name + " " + str(champ.ratio))
 	return tracked_champs
 
 @app.route('/')
