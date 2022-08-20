@@ -3,12 +3,17 @@
 <body style="background-color:black;color:white;font-family:Helvetica, sans-serif;padding: 20px"><h3>KIKO JONES GAME TRACKER</h3>
 <h4>last {{ games|length }} games</h4>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
-{% for game in games %}
+	<div class="well">...</div>
+	{% for champ in analysis %}
+	<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ champ.name }}.png" width="32" height="32"> {{ champ.wins }}w / {{ champ.losses }} ({{champ.ratio}}%)</br>
+	{% endfor %}
+	</div>
+	{% for game in games %}
 	<div class="panel panel-default" style="background-color:slategray">
 	    <div class="panel-heading" role="tab" style="background-color:darkslategray">
 	      <h4 class="panel-title" style="background-color:darkslategray">
 		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
-		<table><tr><td><img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ game.champ }}.png" width="32" height="32"></td><td>
+		<table><tr><td><img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ game.champ }}.png" width="32" height="32"> </td><td>
 		{% if game.win == "TRUE" %}
 			<font color="cornflowerblue">WIN on 
 		{% else %}
