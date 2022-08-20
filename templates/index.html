@@ -5,7 +5,16 @@
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
 	<div class="well" style="background-color:slategray">
 	{% for key, value in analysis.items()|sort(attribute='games_played') %}
-		<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)</br>
+		<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
+		<div class="progress" style="width: {{value.games_played * 20}}px">
+		  <div class="progress-bar progress-bar-active" style="width: {{value.ratio}}%">
+			<span class="sr-only">35% Complete (success)</span>
+		  </div>
+		  <div class="progress-bar progress-bar-danger" style="width: {{100 - value.ratio}}%">
+    			<span class="sr-only">10% Complete (danger)</span>
+  		  </div>
+		</div>
+		</br>
 	{% endfor %}
 	</div>
 	{% for game in games %}
