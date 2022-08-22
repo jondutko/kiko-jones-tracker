@@ -2,6 +2,13 @@
 {% block content %}
 <body style="background-color:black;color:white;font-family:Optima;padding: 20px"><h3>KIKO JONES GAME TRACKER</h3>
 <h4>A live record of my last {{ games|length }} games</h4>
+<div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
+    <li role="presentation"><a href="#games" aria-controls="games" role="tab" data-toggle="tab">All Games</a></li>
+  </ul>
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane active" id="overview">
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
 	<div class="well" style="background-color:slategray"><table style="border-spacing: 3px">
 	{% for value in analysis %}
@@ -12,6 +19,8 @@
 	{% endfor %}
 	</table>
 	</div>
+</div>
+<div role="tabpanel" class="tab-pane" id="games">
 	{% for game in games %}
 	<div class="panel panel-default" style="background-color:slategray">
 	    <div class="panel-heading" role="tab" style="background-color:darkslategray">
@@ -42,6 +51,9 @@
 	      </div>
 	    </div>
 	  </div>
+	</div>
+</div>
 {% endfor %}
+</div>
 </div>
 {% endblock %}
