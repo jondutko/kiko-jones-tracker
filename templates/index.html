@@ -14,7 +14,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="overview">
     {% for value in analysis %}
-    <img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
+    <img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)<br>
     {% endfor %}
     </div>
     <div role="tabpanel" class="tab-pane" id="games">
