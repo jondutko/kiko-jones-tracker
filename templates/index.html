@@ -1,58 +1,21 @@
 {% extends "bootstrap/base.html" %}
 {% block content %}
-<body style="background-color:black;color:white;font-family:Optima;padding: 20px"><h3>KIKO JONES GAME TRACKER</h3>
-<h4>A live record of my last {{ games|length }} games</h4>
+<body style="background-color:black;color:white;font-family:Optima;padding: 20px"><h3>kiko jones tracker</h3>
+	
 <div>
+
+  <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">Overview</a></li>
     <li role="presentation"><a href="#games" aria-controls="games" role="tab" data-toggle="tab">All Games</a></li>
   </ul>
-<div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="overview">
-	{% for value in analysis %}
-	<tr><td>
-	<img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
-	</td><td style="vertical-align:middle; background-color:black">
-	</td></tr>
-	{% endfor %}
-	</table>
-	</div>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="overview">Overview</div>
+    <div role="tabpanel" class="tab-pane" id="games">All Games</div>
+  </div>
+
 </div>
-<div role="tabpanel" class="tab-pane" id="games">
-<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
-	{% for game in games %}
-	<div class="panel panel-default" style="background-color:slategray">
-	    <div class="panel-heading" role="tab" style="background-color:darkslategray">
-	      <h4 class="panel-title" style="background-color:darkslategray">
-		<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ game.timestamp }}" aria-expanded="false" aria-controls="collapse{{ game.timestamp }}">
-		<table><tr><td><img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ game.champ }}.png" width="32" height="32"> </td><td>
-		{% if game.win == "TRUE" %}
-			<font color="cornflowerblue">WIN on 
-		{% else %}
-		        <font color="coral">LOSS on 
-		{% endif %}
-			{{ game.champ }}</br> {{ game.date }}, {{ game.minutes }} minutes </font>
-		</td></tr></table>
-		</a>
-	      </h4>
-	    </div>
-	    <div id="collapse{{ game.timestamp }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ game.timestamp }}">
-	      <div class="panel-body">
-		{% for item in game.items %}
-		      {% if item != "0" %}
-			<img src="https://ddragon.leagueoflegends.com/cdn/12.13.1/img/item/{{ item }}.png" width="32" height="32">
-		      {% endif %}
-		{% endfor %}
-		</br>
-		{% for rune in game.runes %}
-		    <img src="https://ddragon.canisback.com/img/{{ rune }}" width="32" height="32">
-		{% endfor %}
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
-{% endfor %}
-</div>
-</div>
+	
 {% endblock %}
