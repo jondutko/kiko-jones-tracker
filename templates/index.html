@@ -15,7 +15,7 @@
     {% else %}
     <div class="alert alert-warning" role="alert" style="width:40%">
     {% endif %}
-    <img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins + value.losses }} games: {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
+    <img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins + value.losses }} game(s): {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)
     </div>		    
     {% endfor %}
 
