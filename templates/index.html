@@ -5,7 +5,20 @@
 	
 <div>
 
-  <!-- Tab panes -->
+  <div>
+	  
+    {% for value in analysis %}
+    {% if value.ratio > 50 %}
+    <div class="alert alert-success" role="alert">
+    {% elif value.ratio < 25 %}
+    <div class="alert alert-danger" role="alert">
+    {% else %}
+    <div class="alert alert-warning" role="alert">
+    {% endif %}
+    <img src="https://ddragon.leagueoflegends.com/cdn/12.15.1/img/champion/{{ value.name }}.png" width="32" height="32"> {{ value.wins }}W / {{ value.losses }}L ({{value.ratio}}%)<br>
+    </div>		    
+    {% endfor %}
+
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="width:40%">
 		{% for game in games %}
 		<div class="panel panel-default" style="background-color:slategray">
